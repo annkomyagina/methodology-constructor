@@ -1,0 +1,200 @@
+{
+  "section_id": "section_07_dissemination",
+  "number": "VII",
+  "title": "VII. Порядок уточнения и предоставления (распространения) официальной статистической информации",
+  "description": "Раздел VII обязателен. Выберите хотя бы один способ размещения и заполните его. Пункт 7.2 автоматически использует позиции ФПСР, введенные в пункте 1.3.",
+  "required": true,
+  "status": "draft_filled",
+  "sources": {
+    "primary_fixed_text": "7 раздел.docx",
+    "secondary_ui_decisions": "index-current.html",
+    "technical_reference": "main.py"
+  },
+  "source_priority_rule": "Черный фиксированный текст берется из исходного Word-раздела. Позиции ФПСР в пункте 7.2 автоматически берутся из пункта 1.3.",
+  "source_notes": [
+    {
+      "type": "title_correction",
+      "description": "В исходном Word используется формулировка «предоставления (распространения)». В ранее созданном manifest использовалась формулировка через косую черту. В шаблоне сохраняется вариант из Word."
+    },
+    {
+      "type": "optional_publication_blocks_decision",
+      "description": "В исходном Word строки ЕМИСС и сайта Росстата присутствуют сразу. В интерфейсе они оформлены как выбираемые блоки. Для завершения раздела пользователь должен выбрать и заполнить хотя бы один способ размещения."
+    },
+    {
+      "type": "validation_decision",
+      "description": "Раздел VII считается заполненным, если указана хотя бы одна позиция ФПСР, выбран хотя бы один способ размещения и заполнены все выбранные блоки."
+    }
+  ],
+  "fields": {
+    "publication_blocks": {
+      "label": "Блоки размещения официальной статистической информации",
+      "type": "optional_group_controller",
+      "required": false,
+      "linked": false,
+      "optional": true,
+      "multiline": false,
+      "default": {
+        "emiss": false,
+        "rosstat": false,
+        "additional": false
+      },
+      "hint": "Выберите, какие блоки размещения нужно добавить в пункт 7.1: ЕМИСС, официальный сайт Росстата или дополнительный способ размещения.",
+      "source_comment": "В исходном Word предусмотрено размещение официальной статистической информации в информационно-телекоммуникационной сети «Интернет», включая ЕМИСС и официальный сайт Росстата.",
+      "ui_notes": "В index.html это состояние хранится как publication_blocks: emiss, rosstat, additional."
+    },
+    "publication_emiss_info": {
+      "label": "Сведения для размещения в ЕМИСС",
+      "type": "inline",
+      "placeholder": "полная рабочая ссылка на страницу показателя ЕМИСС",
+      "required": false,
+      "linked": false,
+      "optional": true,
+      "multiline": false,
+      "hint": "Укажите полную рабочую ссылку вида https://www.fedstat.ru/indicator/12345. После импорта ссылка требует пользовательской проверки.",
+      "source_comment": "Для ЕМИСС рекомендуется указать ответственное ведомство, позицию ФПСР и наименование официальной статистической информации.",
+      "ui_notes": "В index.html поле publication_emiss_info является необязательным и показывается только при включении блока ЕМИСС."
+    },
+    "publication_rosstat_info": {
+      "label": "Сведения для размещения на сайте Росстата",
+      "type": "inline",
+      "placeholder": "полная рабочая ссылка на страницу официального сайта Росстата",
+      "required": false,
+      "linked": false,
+      "optional": true,
+      "multiline": false,
+      "hint": "Укажите полную рабочую ссылку на соответствующую страницу официального сайта Росстата. После импорта ссылка требует проверки.",
+      "source_comment": "В исходном Word предусмотрена строка размещения на официальном сайте Росстата по адресу: https://rosstat.gov.ru/.",
+      "ui_notes": "В index.html поле publication_rosstat_info является необязательным и показывается только при включении блока сайта Росстата."
+    },
+    "publication_additional_info": {
+      "label": "Дополнительный способ размещения или пояснение",
+      "type": "block",
+      "placeholder": "при необходимости укажите иной источник размещения, адрес, раздел сайта или дополнительное пояснение",
+      "required": false,
+      "linked": false,
+      "optional": true,
+      "multiline": true,
+      "hint": "Это широкий опциональный блок. Используйте его, если нужно дополнить пункт 7.1 иным способом размещения или пояснением.",
+      "source_comment": "Дополнительный блок отсутствует как отдельная строка в исходном Word, но сохранен как UI-расширение для случаев, когда требуется указать иной способ размещения или пояснение.",
+      "ui_notes": "В index.html publication_additional_info реализован как необязательное многострочное поле."
+    }
+  },
+  "validation": {
+    "required": true,
+    "required_items": [
+      "fpsr_positions",
+      "publication_blocks"
+    ],
+    "optional_items": [
+      "publication_blocks",
+      "publication_emiss_info",
+      "publication_rosstat_info",
+      "publication_additional_info"
+    ]
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "VII. Порядок уточнения и предоставления (распространения) официальной статистической информации"
+    },
+    {
+      "type": "paragraph",
+      "id": "7.1",
+      "parts": [
+        {
+          "type": "text",
+          "text": "7.1. Официальная статистическая информация по показателям размещается в информационно-телекоммуникационной сети «Интернет»:"
+        }
+      ]
+    },
+    {
+      "type": "optional_group",
+      "id": "publication_emiss",
+      "controller": "publication_blocks.emiss",
+      "default_enabled": false,
+      "button_label": "+ Добавить блок ЕМИСС",
+      "field": "publication_emiss_info",
+      "parts": [
+        {
+          "type": "text",
+          "text": "в Единой межведомственной информационно-статистической системе (ЕМИСС) по адресу: "
+        },
+        {
+          "type": "field",
+          "field": "publication_emiss_info"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ]
+    },
+    {
+      "type": "optional_group",
+      "id": "publication_rosstat",
+      "controller": "publication_blocks.rosstat",
+      "default_enabled": false,
+      "button_label": "+ Добавить блок сайта Росстата",
+      "field": "publication_rosstat_info",
+      "parts": [
+        {
+          "type": "text",
+          "text": "на официальном сайте Росстата по адресу: "
+        },
+        {
+          "type": "field",
+          "field": "publication_rosstat_info"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ]
+    },
+    {
+      "type": "optional_group",
+      "id": "publication_additional",
+      "controller": "publication_blocks.additional",
+      "default_enabled": false,
+      "button_label": "+ Добавить дополнительный способ размещения",
+      "field": "publication_additional_info",
+      "parts": [
+        {
+          "type": "field_block",
+          "field": "publication_additional_info"
+        }
+      ]
+    },
+    {
+      "type": "empty_state_output",
+      "id": "publication_empty_output",
+      "condition": "no_publication_blocks_enabled",
+      "word_output": "________________.",
+      "ui_note": "Если пользователь не добавил ни один блок размещения, в Word можно вывести пустую строку-заполнитель. Это поле не участвует в обязательной проверке."
+    },
+    {
+      "type": "paragraph",
+      "id": "7.2",
+      "parts": [
+        {
+          "type": "text",
+          "text": "7.2. Предоставление (распространение) информации по показателю осуществляется в сроки согласно "
+        },
+        {
+          "type": "fpsr_reference",
+          "field": "fpsr_positions",
+          "source_section": "section_01_general",
+          "mode": "readonly",
+          "grammar_case": "dative",
+          "suffix": " ФПСР",
+          "empty_text": "позиции ФПСР, не заполненной в пункте 1.3"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ]
+    }
+  ]
+}

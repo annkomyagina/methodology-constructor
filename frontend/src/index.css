@@ -1,0 +1,34 @@
+/* Основной layout */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Длинные тексты внутри абзацев не должны выпирать */
+p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Селекты не растягивают строку */
+.ant-select-selection-item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Пункты меню растягиваются под длинный текст */
+.ant-menu-inline .ant-menu-item,
+.ant-menu-inline .ant-menu-submenu-title {
+  height: auto !important;
+  min-height: 40px;
+  line-height: 1.4 !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  white-space: normal !important;
+}
+
+/* Иконки/иконка статуса справа от текста не сжимается */
+.ant-menu-inline .ant-menu-item .ant-menu-title-content {
+  white-space: normal;
+  word-break: break-word;
+}

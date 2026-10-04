@@ -1,0 +1,90 @@
+{
+  "template_id": "official_statistical_methodology_v1",
+  "version": "1.0.0",
+  "status": "draft_sections_and_ui_filled",
+  "description": "Модульный единый шаблон официальной статистической методологии. Используется как будущий единый источник фиксированного текста, полей, подсказок и правил обязательности для frontend и backend.",
+  "source_priority": {
+    "fixed_black_text": "section_docx",
+    "field_names_and_ui_decisions": "index_current_html",
+    "technical_generation_logic": "main_py"
+  },
+  "rules": {
+    "black_text_must_match_between_frontend_and_word": true,
+    "frontend_and_backend_should_use_same_template_source": true,
+    "all_sections_required_for_mvp": true,
+    "optional_fields_are_not_validated": true,
+    "hints_are_ui_only_and_not_exported_to_word": true
+  },
+  "global_settings": {
+    "empty_required_field_output": "________________",
+    "default_word_font": "Times New Roman",
+    "default_word_font_size": 14
+  },
+  "sections": [
+    {
+      "id": "section_01_general",
+      "number": "I",
+      "title": "I. Общие положения",
+      "file": "sections/section_01_general.json",
+      "required": true,
+      "status": "draft_filled"
+    },
+    {
+      "id": "section_02_abbreviations",
+      "number": "II",
+      "title": "II. Условные обозначения, сокращения",
+      "file": "sections/section_02_abbreviations.json",
+      "required": true,
+      "status": "draft_filled"
+    },
+    {
+      "id": "section_03_definitions",
+      "number": "III",
+      "title": "III. Основные понятия и определения",
+      "file": "sections/section_03_definitions.json",
+      "required": true,
+      "status": "draft_filled"
+    },
+    {
+      "id": "section_04_indicators",
+      "number": "IV",
+      "title": "IV. Основные показатели",
+      "file": "sections/section_04_indicators.json",
+      "required": true,
+      "status": "draft_filled"
+    },
+    {
+      "id": "section_05_sources",
+      "number": "V",
+      "title": "V. Источники набора данных, информации",
+      "file": "sections/section_05_sources.json",
+      "required": true,
+      "status": "draft_filled"
+    },
+    {
+      "id": "section_06_calculations",
+      "number": "VI",
+      "title": "VI. Методологические основы, алгоритм формирования и формулы расчета статистических показателей",
+      "file": "sections/section_06_calculations.json",
+      "required": true,
+      "status": "draft_filled"
+    },
+    {
+      "id": "section_07_dissemination",
+      "number": "VII",
+      "title": "VII. Порядок уточнения и предоставления (распространения) официальной статистической информации",
+      "file": "sections/section_07_dissemination.json",
+      "required": true,
+      "status": "draft_filled"
+    }
+  ],
+  "ui_templates": {
+    "welcome_screen": {
+      "id": "welcome_screen_v1",
+      "file": "ui/welcome_screen.json",
+      "status": "draft_filled",
+      "used_by": "frontend",
+      "affects_word_generation": false
+    }
+  }
+}
