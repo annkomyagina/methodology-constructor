@@ -3,8 +3,8 @@ import os
 import requests
 
 # === ВПИШИТЕ СВОИ ЗНАЧЕНИЯ ===
-FOLDER_ID = "b1gsh8uv199o41f1ktts"          # ID каталога
-API_KEY = "AQVNyR4r9F0JsJTROVVtrY5hHgOFGyWst_zz8hBD"           # секрет API-ключа
+FOLDER_ID = "b1g..."          # ID каталога
+API_KEY = "..."           # секрет API-ключа
 # =============================
 
 url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
