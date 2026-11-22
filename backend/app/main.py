@@ -10,6 +10,7 @@ from fastapi.responses import Response
 
 from app.template_loader import load_manifest, load_section, load_fpsr
 from app.word_builder import build_document
+from app.registry import router as registry_router
 
 # Загружаем .env из папки backend
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
@@ -20,6 +21,8 @@ app = FastAPI(
 )
 
 # CORS: разрешаем фронту на localhost:5173 обращаться к API.
+app.include_router(registry_router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],

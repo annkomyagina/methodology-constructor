@@ -16,4 +16,60 @@ dist/
 
 # OS
 .DS_Store
+Thumbs.db# --- Python environments, caches and local state ---
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Frontend dependencies and builds ---
+node_modules/
+dist/
+dist-ssr/
+coverage/
+*.tsbuildinfo
+
+# --- Secrets and credentials ---
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.p12
+*.pfx
+*.key
+*.secret
+credentials.json
+secrets.json
+secrets.*
+
+# --- Local files and IDE ---
+.vscode/
+.idea/
+.DS_Store
 Thumbs.db
+*.log
+npm-debug.log*
+yarn-error.log*
+*.local
+*.bak
+*.tmp
+
+# --- Local registry data: excluded from PUBLIC repository by default ---
+# Sources and original documents from the customer require publication permission.
+backend/data/osm_registry.sqlite
+backend/data/osm_registry.sqlite-*
+backend/data/Документы_ОСМ/
+sources/
+# Backups and user-generated files
+*.sqlite3
+*.db-journal
+*.sqlite-journal
+*_backup.sqlite
+*_backup.db

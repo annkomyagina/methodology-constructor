@@ -138,6 +138,7 @@ def _render_heading(doc, block) -> None:
 
 def _render_paragraph(doc, block, values, fields) -> None:
     p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     _render_paragraph_parts(p, block.get("parts", []), values, fields)
 
 
@@ -147,7 +148,7 @@ def _render_field_block(doc, block, values, fields) -> None:
     value = _val(values, field_name, def_.get("default"))
     if value in (None, ""):
         value = EMPTY if def_.get("required") else ""
-    _add_paragraph(doc, str(value or ""))
+    _add_paragraph(doc, str(value or ""), align=WD_ALIGN_PARAGRAPH.JUSTIFY)
 
 
 def _render_repeatable_group(doc, block, values, fields) -> None:
@@ -169,6 +170,7 @@ def _render_repeatable_group(doc, block, values, fields) -> None:
 
     for i, row in enumerate(clean_rows):
         p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
         for part in parts:
             pt = part.get("type")
             if pt == "text":
@@ -192,7 +194,7 @@ def _render_classifier_paragraphs(doc, block, values, fields) -> None:
     for item in items:
         text = item.get("paragraph") if isinstance(item, dict) else None
         if text:
-            _add_paragraph(doc, text)
+            _add_paragraph(doc, text, align=WD_ALIGN_PARAGRAPH.JUSTIFY)
 
 
 def _render_optional_group(doc, block, values, fields) -> None:
@@ -206,6 +208,7 @@ def _render_optional_group(doc, block, values, fields) -> None:
     def_ = fields.get(field_name) or {}
     value = _val(values, field_name, def_.get("default"))
     p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     for part in block.get("parts", []):
         pt = part.get("type")
         if pt == "text":
@@ -331,8 +334,9 @@ def _render_formula_repeated_group(doc, block, values, fields) -> None:
         point_num = f"{major}.{minor + i}."
         formula_num = formula_num_start + i
 
-        # 1. Заголовок блока
+        # 1. Текстовый абзац перед формулой
         p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
         text = f"{point_num} Расчёт показателя «{ind_name}»"
         if okei:
             text += f" (код по ОКЕИ — {okei})"
@@ -372,6 +376,7 @@ def _render_formula_repeated_group(doc, block, values, fields) -> None:
                 if not line:
                     continue
                 pe = doc.add_paragraph()
+                pe.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
                 _add_formula_runs(pe, line)
 # ---------- раздел и документ ----------
 

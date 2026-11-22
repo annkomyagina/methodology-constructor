@@ -105,10 +105,8 @@ function KatexPreview({ math }: { math: string }) {
 
 export default function FormulaBlock({
   name,
-  def,
   sourceField,
   pointNumberStart = '6.2',
-  formulaNumberStart = 1,
 }: Props) {
   const rows = (useProjectStore((s) => s.values[name]) as CalcRow[] | undefined) ?? [];
   const indicators = useProjectStore((s) => s.values[sourceField ?? '']) as
@@ -180,14 +178,12 @@ export default function FormulaBlock({
           const indicatorName =
             indicatorsClean[i]?.name ?? 'наименование показателя';
           const okei = indicatorsClean[i]?.okei ?? '';
-          const pointNumber = `${pointNumberStart.replace(/\.$/, '')}`;
           // 6.2, 6.3, 6.4, ... — нумеруем каждую строку отдельно
           const pointNum = (() => {
             const [major, minor] = pointNumberStart.split('.').map((x) => parseInt(x, 10));
             if (isNaN(major) || isNaN(minor)) return `${pointNumberStart}.${i + 1}`;
             return `${major}.${minor + i}.`;
           })();
-          const formulaNumber = formulaNumberStart + i;
 
           return (
             <Card

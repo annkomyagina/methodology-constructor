@@ -1,6 +1,5 @@
-import { Button, Card, Input, Space, Typography } from 'antd';
-import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
-import type { FieldDef } from '../types/template';
+import { Button, Card, Input, Space, Tooltip, Typography } from 'antd';
+import { DeleteOutlined, PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { useProjectStore } from '../store/projectStore';
 
 const { Text } = Typography;
@@ -102,6 +101,15 @@ export default function RepeatableGroup({
                   <div key={fieldName}>
                     <Text type="secondary" style={{ fontSize: 12, display: 'block' }}>
                       {fieldDef.label ?? fieldName}
+                      {fieldDef.hint && (
+                        <Tooltip title={fieldDef.hint}>
+                          <QuestionCircleOutlined
+                            aria-label={`Подсказка: ${fieldDef.label ?? fieldName}`}
+                            tabIndex={0}
+                            style={{ marginLeft: 6, color: '#8c8c8c', cursor: 'help' }}
+                          />
+                        </Tooltip>
+                      )}
                     </Text>
                     <Input
                       value={row[fieldName] ?? ''}
@@ -126,7 +134,7 @@ export default function RepeatableGroup({
         })}
 
         <Button type="dashed" icon={<PlusOutlined />} onClick={addRow} block>
-          {buttonLabel}
+          {buttonLabel.replace(/^\s*\+\s*/, '')}
         </Button>
       </Space>
     </div>

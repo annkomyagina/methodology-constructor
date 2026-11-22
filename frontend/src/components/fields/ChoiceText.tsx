@@ -1,4 +1,5 @@
-import { Select, Radio, Space } from 'antd';
+import { Select, Radio, Space, Tooltip } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 import type { FieldDef } from '../../types/template';
 import { useProjectStore } from '../../store/projectStore';
 
@@ -7,7 +8,6 @@ interface Props {
   def: FieldDef;
 }
 
-// Порог: если самый длинный вариант длиннее — переключаемся на радио
 const LONG_OPTION_THRESHOLD = 40;
 
 export default function ChoiceText({ name, def }: Props) {
@@ -19,11 +19,9 @@ export default function ChoiceText({ name, def }: Props) {
   const options = def.options ?? [];
   if (options.length === 0) return null;
 
-  const maxLen = Math.max(...options.map((o) => o.label.length));
-  const useRadio = maxLen > LONG_OPTION_THRESHOLD;
+  const maxLen = Math.max(...options.map((option) => option.label.length));
 
-  // Длинные формулировки — радио-кнопки в столбик
-  if (useRadio) {
+  if (maxLen > LONG_OPTION_THRESHOLD) {
     return (
       <div style={{ margin: '8px 0' }}>
         <Radio.Group
@@ -31,9 +29,9 @@ export default function ChoiceText({ name, def }: Props) {
           onChange={(e) => setValue(name, e.target.value)}
         >
           <Space direction="vertical">
-            {options.map((o) => (
-              <Radio key={o.value} value={o.value}>
-                {o.label}
+            {options.map((option) => (
+              <Radio key={option.value} value={option.value}>
+                {option.label}
               </Radio>
             ))}
           </Space>
@@ -42,15 +40,39 @@ export default function ChoiceText({ name, def }: Props) {
     );
   }
 
-  // Короткие варианты — селект
+  // Ant Design 6 использует flex для Select. Не переопределяем display на
+  // inline-block: иначе стрелка переносится под выбранную формулировку.
+  const width = Math.min(320, Math.max(170, maxLen * 9 + 52));
+
   return (
-    <Select
-      value={value as string}
-      onChange={(v) => setValue(name, v)}
-      options={options}
-      style={{ minWidth: 140, maxWidth: 320, display: 'inline-block' }}
-      size="small"
-      popupMatchSelectWidth={false}
-    />
+    <span
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 6,
+        verticalAlign: 'middle',
+        whiteSpace: 'nowrap',
+        maxWidth: '100%',
+      }}
+    >
+      <Select
+        value={value as string}
+        onChange={(nextValue) => setValue(name, nextValue)}
+        options={options}
+        style={{ width, maxWidth: '100%' }}
+        size="small"
+        popupMatchSelectWidth={false}
+        aria-label={def.label || name}
+      />
+      {def.hint && (
+        <Tooltip title={def.hint}>
+          <QuestionCircleOutlined
+            aria-label={`Подсказка: ${def.label || name}`}
+            tabIndex={0}
+            style={{ color: '#8c8c8c', fontSize: 14, cursor: 'help' }}
+          />
+        </Tooltip>
+      )}
+    </span>
   );
 }

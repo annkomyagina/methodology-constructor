@@ -1,4 +1,4 @@
-import { Input, Tooltip } from 'antd';
+import { Input } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import type { FieldDef } from '../../types/template';
 import { useProjectStore } from '../../store/projectStore';

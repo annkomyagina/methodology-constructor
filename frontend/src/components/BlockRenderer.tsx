@@ -34,12 +34,13 @@ export default function BlockRenderer({ block, fields }: Props) {
     if (!def || !def.row_fields) return null;
 
     // Приводим row_fields к нужному виду
-    const rowFields: Record<string, { label?: string; placeholder?: string; required?: boolean }> = {};
+    const rowFields: Record<string, { label?: string; placeholder?: string; required?: boolean; hint?: string }> = {};
     Object.entries(def.row_fields).forEach(([k, v]) => {
       rowFields[k] = {
         label: v.label,
         placeholder: v.placeholder,
         required: v.required,
+        hint: v.hint,
       };
     });
 

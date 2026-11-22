@@ -1,0 +1,16 @@
+.registry-page { background: #f4f6fa; min-height: 100vh; padding: 30px 24px 54px; }
+.registry-container { max-width: 1480px; margin: auto; }
+.registry-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 22px; flex-wrap: wrap; }
+.registry-eyebrow { color: #205f9d; text-transform: uppercase; letter-spacing: .11em; font-size: 12px; font-weight: 700; }
+.registry-stats { margin-bottom: 18px; }
+.registry-stats .ant-card { border-radius: 12px; height: 100%; border-color: #e4e9f2; }
+.registry-stats .ant-statistic-title { color: #566579; }
+.registry-stats .ant-statistic-content { color: #193c63; }
+.registry-filter-card, .registry-table-card { border-radius: 12px; margin-bottom: 18px; border-color: #e4e9f2; }
+.registry-name-cell a { font-weight: 600; line-height: 1.45; display: block; color: #164b80; }
+.registry-name-cell a:hover { text-decoration: underline; }
+.registry-id { font-size: 11px; display: block; margin-top: 5px; }
+.registry-table-card .ant-table-cell { vertical-align: top; }
+.registry-disclaimer { margin-top: 2px; }
+.registry-docx-preview { white-space: pre-wrap; max-height: 57vh; overflow-y: auto; border: 1px solid #e7eaf0; padding: 24px; line-height: 1.8; background: #fff; font-family: Georgia, 'Times New Roman', serif; }
+@media(max-width: 650px) { .registry-page { padding: 18px 12px 32px; } .registry-heading h2 { font-size: 23px !important; } }

@@ -11,7 +11,7 @@ interface Props {
 
 export default function ParagraphBlock({ block, fields }: Props) {
   return (
-    <p style={{ lineHeight: 1.8, marginBottom: 12 }}>
+    <div style={{ lineHeight: 1.8, marginBottom: 12, overflowWrap: 'break-word' }}>
       {block.parts.map((part, i) => {
         if (part.type === 'text') {
           return <span key={i}>{part.text}</span>;
@@ -64,6 +64,6 @@ export default function ParagraphBlock({ block, fields }: Props) {
 
         return null;
       })}
-    </p>
+    </div>
   );
 }

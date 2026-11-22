@@ -13,16 +13,28 @@ export default function InlineField({ name, def }: Props) {
   const setValue = useProjectStore((s) => s.setValue);
 
   return (
-    <span style={{ display: 'inline-block', minWidth: 220 }}>
+    <span
+      style={{
+        display: 'inline-flex',
+        width: 'min(380px, 100%)',
+        maxWidth: '100%',
+        verticalAlign: 'middle',
+      }}
+    >
       <Input
         value={value ?? ''}
         placeholder={def.placeholder ?? ''}
-        onChange={(e) => setValue(name, e.target.value)}
+        onChange={(event) => setValue(name, event.target.value)}
         status={def.required && !value ? 'warning' : undefined}
+        aria-label={def.label || name}
         suffix={
           def.hint ? (
             <Tooltip title={def.hint}>
-              <QuestionCircleOutlined style={{ color: '#999' }} />
+              <QuestionCircleOutlined
+                aria-label={`Подсказка: ${def.label || name}`}
+                tabIndex={0}
+                style={{ color: '#8c8c8c', cursor: 'help' }}
+              />
             </Tooltip>
           ) : null
         }

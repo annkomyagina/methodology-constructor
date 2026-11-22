@@ -1,4 +1,4 @@
-import { Button, Input, Switch, Typography } from 'antd';
+import { Button, Input, Typography } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import type { FieldDef } from '../types/template';
 import { useProjectStore } from '../store/projectStore';
